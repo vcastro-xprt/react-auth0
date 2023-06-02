@@ -20,13 +20,14 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
+  Flex,
 } from "@chakra-ui/react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useForm } from "react-hook-form";
 import Loading from "../components/Loading";
 
 function AdmimHome() {
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
 
   const [users, setUsers] = useState([
     { id: 1, name: "John Doe", email: "john@example.com", company: "ABC Inc" },
@@ -109,9 +110,32 @@ function AdmimHome() {
   return (
     <ChakraProvider>
       <Box p={4}>
-        <Button colorScheme="blue" onClick={handleOpenNewUserModal} mb={4}>
-          Create New User
-        </Button>
+        <Flex justifyContent="space-between">
+          <Button colorScheme="blue" onClick={handleOpenNewUserModal} mb={4}>
+            Create New User
+          </Button>
+
+          <Button
+            colorScheme="blue"
+            onClick={async () => {
+              const token = await getAccessTokenSilently();
+              const response = await fetch(
+                "/.netlify/functions/listFoldersAndFiles",
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+              const data = await response.json();
+
+              alert(JSON.stringify(data));
+            }}
+            mb={4}
+          >
+            Fetch Netlify Function
+          </Button>
+        </Flex>
 
         <Table variant="striped" colorScheme="gray">
           <Thead>
