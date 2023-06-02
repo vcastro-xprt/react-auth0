@@ -1,105 +1,39 @@
-# Auth0 React SDK Sample Application
+# Instructions
 
-This sample demonstrates the integration of [Auth0 React SDK](https://github.com/auth0/auth0-react) into a React application created using [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html). The sample is a companion to the [Auth0 React SDK Quickstart](https://auth0.com/docs/quickstart/spa/react).
-
-This sample demonstrates the following use cases:
-
-- [Login](https://github.com/auth0-samples/auth0-react-samples/blob/master/Sample-01/src/components/NavBar.js#L72-L79)
-- [Logout](https://github.com/auth0-samples/auth0-react-samples/blob/master/Sample-01/src/components/NavBar.js#L102-L108)
-- [Showing the user profile](https://github.com/auth0-samples/auth0-react-samples/blob/master/Sample-01/src/views/Profile.js)
-- [Protecting routes](https://github.com/auth0-samples/auth0-react-samples/blob/master/Sample-01/src/views/Profile.js#L33)
-- [Calling APIs](https://github.com/auth0-samples/auth0-react-samples/blob/master/Sample-01/src/views/ExternalApi.js)
-
-## Project setup
-
-Use `yarn` to install the project dependencies:
+Run the following command to install the dependencies:
 
 ```bash
-yarn install
+npm install
 ```
-
-## Configuration
-
-### Create an API
-
-For the ["call an API"](https://auth0.com/docs/quickstart/spa/react/02-calling-an-api) page to work, you will need to [create an API](https://auth0.com/docs/apis) using the [management dashboard](https://manage.auth0.com/#/apis). This will give you an API identifier that you can use in the `audience` configuration field below.
-
-If you do not wish to use an API or observe the API call working, you should not specify the `audience` value in the next step. Otherwise, you will receive a "Service not found" error when trying to authenticate.
-
-### Configure credentials
-
-The project needs to be configured with your Auth0 domain and client ID in order for the authentication flow to work.
-
-To do this, first copy `src/auth_config.json.example` into a new file in the same folder called `src/auth_config.json`, and replace the values with your own Auth0 application credentials, and optionally the base URLs of your application and API:
-
-```json
-{
-  "domain": "{YOUR AUTH0 DOMAIN}",
-  "clientId": "{YOUR AUTH0 CLIENT ID}",
-  "audience": "{YOUR AUTH0 API_IDENTIFIER}",
-  "appOrigin": "{OPTIONAL: THE BASE URL OF YOUR APPLICATION (default: http://localhost:3000)}",
-  "apiOrigin": "{OPTIONAL: THE BASE URL OF YOUR API (default: http://localhost:3001)}"
-}
-```
-
-**Note**: Do not specify a value for `audience` here if you do not wish to use the API part of the sample.
-
-## Run the sample
-
-### Compile and hot-reload for development
-
-This compiles and serves the React app and starts the backend API server on port 3001.
 
 ```bash
-yarn run dev
+npm install -g netlify-cli
 ```
 
-## Deployment
-
-### Compiles and minifies for production
+Set the following .env variables:
 
 ```bash
-yarn run build
+REACT_APP_CLIENT_ID=o03bh2q24duys557pw9lm49h0hf2ok2o
+REACT_APP_CLIENT_SECRET=dh2vsaFLi8JkAhEefJkW39d91hyhn1uj
+REACT_APP_PUBLIC_KEY_ID=nyewgulu
+REACT_APP_PRIVATE_KEY="-----BEGIN ENCRYPTED PRIVATE KEY-----\nMIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIIONaXKiBW3sCAggA\nMBQGCCqGSIb3DQMHBAiPW0V+heZV5gSCBMgJKKQt796QGw6L0rB6DviND2bQ+35I\neAWRK5hTv4N10wPet2nv8d5KPbSGG/Jp3QsLa0/ysVT4rNhiwja10JUT5qLxI6FX\nV/QkTPjie06zwWgIQmZA4Yit44IsUowPGolXzyuCHMEbGoHA5tD7SH1pZpbhjYN4\nPDafsyVM07Vn27P/SJ7QzYBMPwJjjMmMj5CTmWrFIKYRo4Z/eZ4m0LuxbbHIJWUV\nu3jQ+AU80UAR1dJ8njo1eSVUD9wDPyDNQAEz3YW9Kr3iPUa8R6azDWQa0WTLBre4\nojxD9w6Ztm0daa9fL07n27UjjE7O8zqIwXTB2O6id47NFyOOX06006IGEPmv/VGQ\n7JrooVAU+vvkuxsOH6KhyieMM5ayzTWEtKUT/ET98j8AtzTcccna8dWyiLXzP3r3\n7wmx5tFGEFcvwshzoBJnSJjBcsDah/pIkISObFErbvc0j7WpUWDpSI41lgIYHoW8\n6k8mPcYjvoHqJhDIr6xyx/eVeKmM5gdvVoYMyY/jE2JQFebhkwz6A+yaMFMA/z/Q\n9XfKNfcS7RJK8YqSVzBs/R8KljmhSsY6Gj6/HM6kHFHoZp8E11+4MKDGvwwUi0M0\nbqSqvoYRQl6FDvPHsrSveAZx4cxCDKfnFjqJ1+Hag6cQcXOUIa/a3cBpgDXDjfbi\ndQRvKb5g9OLtFbov0uQlP02xAP8vCnUkTk2AWQancUFqt3kAzz6F65hgeYjI5nTa\nfLnJmtWY4/ASdltqEm5NneVb09cXrrZlFWcAhn6bOJfBuXFXJRr7cyi6PM9eBLhd\nnE8Xj4Wdn64heOGy24jZPy3GoHOxtPIfMlSLas2FWiAF3iWCu9NkNShATpjh0gnS\nXHgqQzvwiBq+iXsqTgAqpPnTC0gIAe79TCtZHzWvS6wc6zPjjIPEZuA/iqGga8cl\nL1ceBLqpu7dN3U6y2A44G/1t2+DKw9M9ab3fWWOG/xgf31yGY0xoHYx15pc9xX3g\nHqy8NkemnECLZqy8aRPkM1OyO2Z3sbkxtYBjk1JgXLSrHUiO+/RmW2Oph6S4kJqQ\nuEwA7opnOqZ22/XCGgy0Nxl6cyEdM+l+lvdPVvA40Xmy7UoG4SOyh57YnwbWmyt+\nwv9cDuBgDd396yX5tH72SuszLkuHfBj5ONx0hGZb9bmxEmqkkvbKULI+cMQkRA7G\nqVE4rd3WoWn3NjTuaVza9FxO//92BWsr3fs7SDVoFphAuZVu/v8U/usVtCehR6Z4\ne6z/k/qFQGnDM6k6IHIyAG47TA3T4p67Z3sLx9uDd0wX9Sh5QtTYTA2kw6M9xPCA\nYLQMmBQhWfUg5IB/ArIunh4kqieT72Cf9rbhtzzfjHVVroWZLhdukfnU8noPOekC\nBPjjMvrGXaoAgOBS+p5ElrG36aIO7NK9iIgxsYjNwnhdAbUa0pmQMVL42ELx8+9+\nuHzaWUzQCmSm/v1rWWkrd5CIq++4nYbUcN4L1C7o1DsFFNWNUgc0jYrfEABKUwOY\nNUnNqExy2T4a6l9X0YTetvjNmZpp3KPszsVDcXFr0lLWdPjP5U2obkPmZWxNpvxq\nvmGkdRPNP4Ks+AvDdsoMUqM+9oJhZ18FbmPpnGefk8yFiS2ClUhv/ayyAVZiXkkE\nWXg=\n-----END ENCRYPTED PRIVATE KEY-----\n"
+REACT_APP_PASSPHRASE=8bfc196ea45de872e1d94faad8bc5fbd
+REACT_APP_ENTERPRISE_ID=1043894477
+
 ```
 
-### Docker build
-
-To build and run the Docker image, run `exec.sh`, or `exec.ps1` on Windows.
-
-### Run your tests
+Run the following command to run the application:
 
 ```bash
-yarn run test
+netlify dev
 ```
 
-## Frequently Asked Questions
+CLick login button and login with:
+username: vcastro@xprt.io
+password: Vagner1272
 
-If you're having issues running the sample applications, including issues such as users not being authenticated on page refresh, please [check the auth0-react FAQ](https://github.com/auth0/auth0-react/blob/master/FAQ.md).
+Go to admin page puting the /admin in the url
 
-## What is Auth0?
+Click in the button "Fetch Netlify Function"
 
-Auth0 helps you to:
-
-* Add authentication with [multiple sources](https://auth0.com/docs/identityproviders), either social identity providers such as **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce** (amongst others), or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS, or any SAML Identity Provider**.
-* Add authentication through more traditional **[username/password databases](https://auth0.com/docs/connections/database/custom-db)**.
-* Add support for **[linking different user accounts](https://auth0.com/docs/users/user-account-linking)** with the same user.
-* Support for generating signed [JSON Web Tokens](https://auth0.com/docs/tokens/json-web-tokens) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when, and where users are logging in.
-* Pull data from other sources and add it to the user profile through [JavaScript rules](https://auth0.com/docs/rules).
-
-## Create a Free Auth0 Account
-
-1. Go to [Auth0](https://auth0.com) and click **Sign Up**.
-2. Use Google, GitHub, or Microsoft Account to login.
-
-## Issue Reporting
-
-If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/responsible-disclosure-policy) details the procedure for disclosing security issues.
-
-## Author
-
-[Auth0](https://auth0.com)
-
-## License
-
-This project is licensed under the MIT license. See the [LICENSE](../LICENSE) file for more info.
+This will return the folders and files from Box
