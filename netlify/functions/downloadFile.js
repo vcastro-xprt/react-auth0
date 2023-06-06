@@ -13,7 +13,7 @@ exports.handler = withIntegrations(
 
     return {
       statusCode: 200,
-      body: data,
+      body: JSON.stringify(data),
     };
   },
   {

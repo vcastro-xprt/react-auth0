@@ -1,9 +1,6 @@
 const { adminClient } = require("../../infra/box");
 
-const listFoldersAndFiles = async (
-  folderId,
-  tree = { name: "root", id: "", type: "", children: [] }
-) => {
+const listFoldersAndFiles = async (folderId, tree = []) => {
   try {
     const items = await adminClient.folders.getItems(folderId);
 
@@ -16,7 +13,11 @@ const listFoldersAndFiles = async (
           children: [],
         };
 
-        tree.children.push(folderNode);
+        if (tree.children) {
+          tree.children.push(folderNode);
+        } else {
+          tree.push(folderNode);
+        }
 
         await listFoldersAndFiles(item.id, folderNode);
       } else if (item.type === "file") {

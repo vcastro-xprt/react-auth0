@@ -5,6 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
 import history from "./utils/history";
+import { ChakraProvider } from "@chakra-ui/react";
 // import { getConfig } from "./config";
 
 const onRedirectCallback = (appState) => {
@@ -31,7 +32,9 @@ const providerConfig = {
 
 ReactDOM.render(
   <Auth0Provider {...providerConfig}>
-    <App />
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </Auth0Provider>,
   document.getElementById("root")
 );
