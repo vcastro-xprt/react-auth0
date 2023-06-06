@@ -9,6 +9,7 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import ExternalApi from "./views/ExternalApi";
 import AdmimHome from "./admin/home";
+import MyFiles from "./views/MyFiles";
 import { useAuth0 } from "@auth0/auth0-react";
 import history from "./utils/history";
 
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/profile" component={Profile} />
             <Route path="/external-api" component={ExternalApi} />
             <Route path="/admin" component={AdmimHome} />
+            <Route path="/files" component={MyFiles} />
           </Switch>
         </Container>
         <Footer />
