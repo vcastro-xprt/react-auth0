@@ -1,33 +1,31 @@
-import React, { useState } from "react";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 import {
   Box,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
-  FormErrorMessage,
-  Flex,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loading from "../components/Loading";
 
 function AdmimHome() {
-  const { user, getAccessTokenSilently } = useAuth0();
-
   const [users, setUsers] = useState([
     { id: 1, name: "John Doe", email: "john@example.com", company: "ABC Inc" },
     {
@@ -111,27 +109,6 @@ function AdmimHome() {
       <Flex justifyContent="space-between">
         <Button colorScheme="blue" onClick={handleOpenNewUserModal} mb={4}>
           Create New User
-        </Button>
-
-        <Button
-          colorScheme="blue"
-          onClick={async () => {
-            const token = await getAccessTokenSilently();
-            const response = await fetch(
-              "/.netlify/functions/listFoldersAndFiles",
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-            const data = await response.json();
-
-            alert(JSON.stringify(data));
-          }}
-          mb={4}
-        >
-          Fetch Netlify Function
         </Button>
       </Flex>
 

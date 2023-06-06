@@ -32,8 +32,6 @@ CLick login button and login with:
 username: vcastro@xprt.io
 password: Vagner1272
 
-Go to admin page puting the /admin in the url
+The "Admin" menu in the header display the users of the application
 
-Click in the button "Fetch Netlify Function"
-
-This will return the folders and files from Box
+The "My files" menu in the header display the folders and files that the user has access to.
